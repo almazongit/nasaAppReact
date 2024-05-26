@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import headerImg from "../assets/img/header-img.svg";
 import 'animate.css';
-import TrackVisibility from 'react-on-screen';
 import { Helmet } from 'react-helmet';
 
 
@@ -44,10 +43,7 @@ export const Main = () => {
             <Container>
                 <Row className="align-items-center">
                     <Col xs={12} md={6} xl={7}>
-                        <TrackVisibility>
-                            {
-                                ({ isVisible }) =>
-                                    <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                                    <div>
                                         <h1>Diamond and Nasa <span className="txt-rotate"><span className="wrap">{text}</span></span></h1>
                                         <p>Добро пожаловать на сайт "Diamond and NASA"! Здесь  вы сможете окунуться в мир научных открытий и миссий NASA.
                                             Просматривайте захватывающие фотографии космоса в разделе APOD, узнавайте о миссиях космического аппарата DSCOVR в EPIC,
@@ -60,16 +56,11 @@ export const Main = () => {
                                             <a href="/rover">Mars Rover Photos - Фотографии поверхности Марса, сделанные марсоходами NASA Curiosity, Opportunity и Spirit.</a>
                                         </div>
                                     </div>
-                            }
-                        </TrackVisibility>
                     </Col>
                     <Col xs={12} md={6} xl={5}>
-                        <TrackVisibility>
-                            {({ isVisible }) =>
-                                <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
+                                <div>
                                     <img src={headerImg} alt="Header Img"/>
-                                </div>}
-                        </TrackVisibility>
+                                </div>
                     </Col>
                 </Row>
             </Container>

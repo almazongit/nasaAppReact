@@ -68,7 +68,7 @@ export const Epic = () => {
 
                 <div className="container epic-photos d-flex flex-column">
                         {
-                             data && data.length > 0 ? (isVisible && data.filter((_, index) => index % 5 === 0).map((photo, index) => (<EPICPhoto key={index} photo={photo} />))) : (<><p>Фото на такую дату не найдены. Возможно, они отсутствуют, вводите дату от 2015 года </p></>)
+                             data && data.length > 0 ? (isVisible && data.filter((_, index) => index % 2 === 0).map((photo, index) => (<EPICPhoto key={index} photo={photo} />))) : (<><p>Фото на такую дату не найдены. Возможно, они отсутствуют, вводите дату от 2015 года </p></>)
                         }
                 </div>
             </div>
