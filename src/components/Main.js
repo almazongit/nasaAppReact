@@ -1,28 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import headerImg from "../assets/img/header-img.svg";
-import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 import { Helmet } from 'react-helmet';
 
 
-const Main = () => {
+export const Main = () => {
     const [loopNum, setLoopNum] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
     const [text, setText] = useState('');
-    const [delta, setDelta] = useState(300 - Math.random() * 100);
-    const [index, setIndex] = useState(1);
     const toRotate = [ "APOD NASA", "EPIC NASA", "ROVER NASA" ];
-    const period = 2000;
 
     useEffect(() => {
         let ticker = setInterval(() => {
             tick();
-        }, delta);
+        }, 500);
 
         return () => { clearInterval(ticker) };
-    }, [text])
+    })
 
     const tick = () => {
         let i = loopNum % toRotate.length;
@@ -31,21 +27,11 @@ const Main = () => {
 
         setText(updatedText);
 
-        if (isDeleting) {
-            setDelta(prevDelta => prevDelta / 2);
-        }
-
         if (!isDeleting && updatedText === fullText) {
             setIsDeleting(true);
-            setIndex(prevIndex => prevIndex - 1);
-            setDelta(period);
         } else if (isDeleting && updatedText === '') {
             setIsDeleting(false);
             setLoopNum(loopNum + 1);
-            setIndex(1);
-            setDelta(500);
-        } else {
-            setIndex(prevIndex => prevIndex + 1);
         }
     }
 
@@ -62,16 +48,16 @@ const Main = () => {
                             {
                                 ({ isVisible }) =>
                                     <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                                        <h1>{`Diamond and Nasa`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "APOD NASA", "EPIC NASA", "ROVER NASA" ]'><span className="wrap">{text}</span></span></h1>
+                                        <h1>Diamond and Nasa <span className="txt-rotate"><span className="wrap">{text}</span></span></h1>
                                         <p>Добро пожаловать на сайт "Diamond and NASA"! Здесь  вы сможете окунуться в мир научных открытий и миссий NASA.
                                             Просматривайте захватывающие фотографии космоса в разделе APOD, узнавайте о миссиях космического аппарата DSCOVR в EPIC,
                                             и исследуйте поверхность Марса вместе с марсоходами NASA в разделе Mars Rover Photos.
                                             Путешествие по страницам "Diamond and Nasa" открывает перед посетителями увлекательный мир космических открытий,
                                             вдохновляя на новые открытия и погружение в тайны бескрайнего космоса.</p>
                                         <div className="banner_links">
-                                            <a href="/apod">APOD (Astronomy Picture of the Day) - Удивительные фотографии космоса, обновляемые ежедневно. <ArrowRightCircle size={25} /></a>
-                                            <a href="/epic">EPIC (Earth Polychromatic Imaging Camera) - Информация о снимках Земли, сделанных камерой EPIC с космической орбиты. <ArrowRightCircle size={25} /></a>
-                                            <a href="/rover">Mars Rover Photos - Фотографии поверхности Марса, сделанные марсоходами NASA Curiosity, Opportunity и Spirit. <ArrowRightCircle size={25} /></a>
+                                            <a href="/apod">APOD (Astronomy Picture of the Day) - Удивительные фотографии космоса, обновляемые ежедневно.</a>
+                                            <a href="/epic">EPIC (Earth Polychromatic Imaging Camera) - Информация о снимках Земли, сделанных камерой EPIC с космической орбиты.</a>
+                                            <a href="/rover">Mars Rover Photos - Фотографии поверхности Марса, сделанные марсоходами NASA Curiosity, Opportunity и Spirit.</a>
                                         </div>
                                     </div>
                             }
@@ -91,5 +77,3 @@ const Main = () => {
         </>
     )
 };
-
-export default Main;

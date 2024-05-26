@@ -3,7 +3,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 
-const EPICPhoto = ({ photo }) => {
+export const EPICPhoto = ({ photo }) => {
     const { caption, image, date } = photo;
     let dateStr = image.split('_');
     dateStr= dateStr[2].slice(0, 8); 
@@ -19,8 +19,6 @@ const EPICPhoto = ({ photo }) => {
         </div>
     );
 };
-
-export default EPICPhoto;
 
 
 

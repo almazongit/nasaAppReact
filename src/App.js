@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Apod} from './components/Apod';
 import {Epic} from './components/Epic';
 import {Rover} from './components/Rover';
-import Main from './components/Main';
+import {Main} from './components/Main';
 import { Helmet } from 'react-helmet';
 
 function App() {

@@ -1,9 +1,6 @@
-import FetchedPhoto from "./FetchedPhoto";
-import { Loader } from '@consta/uikit/Loader';
-import { Theme, presetGpnDefault } from "@consta/uikit/Theme";
+import {FetchedPhoto} from "./FetchedPhoto";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { Stars } from "./Stars";
 import MaskedInput from 'react-text-mask';
 import { Helmet } from 'react-helmet';
 
@@ -28,32 +25,29 @@ export const Apod = () => {
     const [isVisible, setIsVisible] = useState('false');
     const [date, setDate] = useState(formattedDate);
     const [data, setData] = useState([]);
+    const [error, setError] = useState(false);
 
 
     const updateDate = (e) => {
         e.preventDefault();
         let dateFromInput = reverseDate(e.target[0].value);
-        setDate(dateFromInput);
+        if (dateFromInput <= formattedDate) {
+            setDate(dateFromInput);
+            setError(false);
+        }
+        else {
+            setError(true);
+        }
+
     };
 
-    const FetchPhotoFromApi = async (date) => {
+    const FetchPhotoFromApi = (date) => {
         const apiKey = 'CCzpixoLyMPRK216VVNBYcLUcK84N7mPqtUTu7Ui';
-        
-        try {
-            const response = await fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${apiKey}`);
-            
-            if (!response.ok) {
-                throw new Error(`Ошибка ${response.status}: ${response.statusText}`);
-            }
-            
-            const data = await response.json();
-            setData(data);
-            setIsVisible(true);
-        } catch (error) {
-            console.error('Ошибка при получении данных:', error);
-            setData([]);
-        }
-      };
+        fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${apiKey}`)
+            .then(response => response.json())
+            .then(data => { setData(data); setIsVisible(true)})
+            .catch(error => {console.error('Ошибка при получении данных:', error); setData([]);});
+    };
 
     useEffect(() => {
         setIsVisible(false);
@@ -79,7 +73,7 @@ export const Apod = () => {
                     </form>
                     <div>
                         {
-                            (data.length === 0) ? <><p>Данные не найдены, возможно ошибка запроса</p><Stars/></> : (isVisible && <FetchedPhoto data={data}/>)
+                            (data.length === 0 || error) ? <><p>Данные не найдены, возможно ошибка запроса</p></> : (isVisible && <FetchedPhoto data={data}/>) 
                         }
                     </div>
 

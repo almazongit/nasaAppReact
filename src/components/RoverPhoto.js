@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-const RoverPhoto = ({ photo }) => {
+export const RoverPhoto = ({ photo }) => {
     const { img_src, camera, rover, sol, earth_date } = photo;
     const [showModal, setShowModal] = useState(false);
 
@@ -47,5 +47,3 @@ const RoverPhoto = ({ photo }) => {
         </div>
     );
 };
-
-export default RoverPhoto;

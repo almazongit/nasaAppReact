@@ -1,8 +1,7 @@
-import RoverPhoto from "./RoverPhoto";
+import {RoverPhoto} from "./RoverPhoto";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Helmet } from 'react-helmet';
-import {Stars} from "./Stars";
 import MaskedInput from 'react-text-mask';
 
 export const Rover = () => {
@@ -58,7 +57,7 @@ export const Rover = () => {
                     <div className="rover-photos container d-flex flex-column">
                         {
                             photos && photos.length > 0 ? (isVisible && photos.slice(0,10).map((photo, index) => (<RoverPhoto key={index} photo={photo} />))) :
-                                (<><p>Фото на такую дату не найдены. Возможно, они отсутствуют, вводите дату от 2018 года </p><Stars/></>)
+                                (<><p>Фото на такую дату не найдены. Возможно, они отсутствуют, вводите дату от 2018 года </p></>)
                         }
                     </div>
                 </div>
@@ -67,4 +66,3 @@ export const Rover = () => {
     );
 };
 
-export default Rover;

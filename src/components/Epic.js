@@ -1,7 +1,6 @@
-import EPICPhoto from "./EPICPhoto";
+import {EPICPhoto} from "./EPICPhoto";
 import React, { useState, useEffect } from "react";
 import { Container} from "react-bootstrap";
-import {Stars} from './Stars';
 import { Helmet } from 'react-helmet';
 import MaskedInput from 'react-text-mask';
 
@@ -30,7 +29,7 @@ export const Epic = () => {
         setDate(dateFromInput);
     };
 
-     const FetchPhotoFromApi = (date) => {
+    const FetchPhotoFromApi = (date) => {
         const apiKey = 'CCzpixoLyMPRK216VVNBYcLUcK84N7mPqtUTu7Ui';
         fetch(`https://api.nasa.gov/EPIC/api/natural/date/${date}?api_key=${apiKey}`)
             .then(response => response.json())
@@ -69,10 +68,9 @@ export const Epic = () => {
 
                 <div className="container epic-photos d-flex flex-column">
                         {
-                             data && data.length > 0 ? (isVisible && data.map((photo, index) => (<EPICPhoto key={index} photo={photo} />))) : (<><p>Фото на такую дату не найдены. Возможно, они отсутствуют, вводите дату от 2015 года </p><Stars/></>)
+                             data && data.length > 0 ? (isVisible && data.filter((_, index) => index % 5 === 0).map((photo, index) => (<EPICPhoto key={index} photo={photo} />))) : (<><p>Фото на такую дату не найдены. Возможно, они отсутствуют, вводите дату от 2015 года </p></>)
                         }
                 </div>
-
             </div>
         </Container>
             </>
