@@ -10,7 +10,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
     return (
             <div className="fetched-photo">
                 <div className="photo-text">
-                    {data.url.includes('youtube.com') ? <iframe width="640" height="480" src={data.url} allowfullscreen /> : <img alt={data.title} src={data.url} /> }
+                    {data.url.includes('youtube.com') ? <iframe width="640" height="480" title="video content" src={data.url} allowfullscreen /> : <img alt={data.title} src={data.url} /> }
                     <div className="text">
                         <h3>{data.title}</h3>
                         <p>{data.explanation}</p>
